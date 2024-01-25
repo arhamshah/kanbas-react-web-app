@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .table {
+            border: 1px solid black;
+        }
+    </style>
+    <title>Grades Screen</title>
+</head>
+
+<body>
+    <table>
+        <tbody>
+            <tr>
+                <td style="vertical-align: 0">
+                    <ul>
+                        <li><a href="/Kanbas/Account/Navigation/index.html">Account</a></li>
+                        <li><a href="/Kanbas/Dashboard/screen.html">Dashboard</a></li>
+                        <li><a href="/Kanbas/Courses/Home/screen.html">Courses</a></li>
+                        <li><a href="/Kanbas/Calendar/index.html">Calender</a></li>
+                        <li><a href="/Kanbas/Inbox/index.html">Inbox</a></li>
+                        <li><a href="#">History</a></li>
+                        <li><a href="#">Studio</a></li>
+                        <li><a href="#">Commons</a></li>
+                        <li><a href="#">Help</a></li>
+                    </ul>
+                </td>
+                <td style="vertical-align: 0">
+                    <ul>
+                        <li><a href="/Kanbas/Courses/Home/screen.html">Home</a></li>
+                        <li><a href="/Kanbas/Courses/Modules/screen.html">Modules</a></li>
+                        <li><a href="/Kanbas/Courses/Piazza/index.html">Piaaza</a></li>
+                        <li><a href="#">Zoom Meetings</a></li>
+                        <li><a href="/Kanbas/Courses/Assignments/screen.html">Assignments</a></li>
+                        <li><a href="#">Quizzes</a></li>
+                        <li><a href="/Kanbas/Courses/Grades/screen.html">Grades</a></li>
+                        <li><a href="#">People</a></li>
+                        <li><a href="#">Panopto Video</a></li>
+                        <li><a href="#">Discussions</a></li>
+                        <li><a href="#">Announcements</a></li>
+                        <li><a href="#">Pages</a></li>
+                        <li><a href="#">Files</a></li>
+                        <li><a href="#">Rubrics</a></li>
+                        <li><a href="#">Outcomes</a></li>
+                        <li><a href="#">Collaborations</a></li>
+                        <li><a href="#">Syllabus</a></li>
+                        <li><a href="/Kanbas/Courses/Settings/screen.html">Settings</a></li>
+                    </ul>
+                </td>
+                <td style="vertical-align: 0;">
+                    <select id="select-book-type">
+                        <option value="GRADEBOOK">Gradebook</option>
+                        <option value="DUMMY">Dummy</option>
+                    </select>
+                    <button>Import</button>
+                    <select id="select-export">
+                        <option value="EXPORT">Export</option>
+                        <option value="DUMMY">Dummy</option>
+                    </select>
+                    <button>Configure</button>
+                    <h2>Student Names</h2>
+                    <input type="text" placeholder="Search Students" id="text-search-students" />
+                    <h2>Assignment Names</h2>
+                    <input type="text" placeholder="Search Assignments" id="text-search-assignments" />
+                    <br><br>
+                    <button>Apply Filters</button><br><br>
+                    <table class="table">
+                        <thead>
+                            <tr class="table">
+                                <td class="table"><b>Student Name</b></td>
+                                <td class="table"><b>A1 SETUP <br>Out of 100</b></td>
+                                <td class="table"><b>A2 HTML <br>Out of 100</b></td>
+                                <td class="table"><b>A3 CSS <br>Out of 100</b></td>
+                                <td class="table"><b>A4 BOOTSTRAP <br>Out of 100</b></td>
+                                <td class="table"><b>A5 JAVASCRIPT <br>Out of 100</b></td>
+                                <td class="table"><b>A6 REACT <br>Out of 100</b></td>
+                                <td class="table"><b>A7 REDUX <br>Out of 100</b></td>
+                                <td class="table"><b>A8 NODE <br>Out of 100</b></td>
+                                <td class="table"><b>A9 MONGO <br>Out of 100</b></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table">
+                                <td class="table">Alice Wonderland</td>
+                                <td class="table">98</td>
+                                <td class="table">89</td>
+                                <td class="table">87</td>
+                                <td class="table">90</td>
+                                <td class="table">89</td>
+                                <td class="table">94</td>
+                                <td class="table">88</td>
+                                <td class="table">87</td>
+                                <td class="table">100</td>
+                            </tr>
+                            <tr class="table">
+                                <td class="table">Princes Leia</td>
+                                <td class="table">98</td>
+                                <td class="table">80</td>
+                                <td class="table">87</td>
+                                <td class="table">86</td>
+                                <td class="table">100</td>
+                                <td class="table">94</td>
+                                <td class="table"><input type="text" id="marks" value="85"></td>
+                                <td class="table">84</td>
+                                <td class="table">92</td>
+                            </tr>
+                            <tr class="table">
+                                <td class="table">Luke Skywalker</td>
+                                <td class="table"><input type="text" id="marks" value="99"></td>
+                                <td class="table">88</td>
+                                <td class="table">97</td>
+                                <td class="table">82</td>
+                                <td class="table">96</td>
+                                <td class="table">93</td>
+                                <td class="table">95</td>
+                                <td class="table">100</td>
+                                <td class="table">93</td>
+                            </tr>
+                            <tr class="table">
+                                <td class="table">Han Solo</td>
+                                <td class="table">83</td>
+                                <td class="table">99</td>
+                                <td class="table">94</td>
+                                <td class="table">98</td>
+                                <td class="table">86</td>
+                                <td class="table">85</td>
+                                <td class="table"><input type="text" id="marks" value="86"></td>
+                                <td class="table">80</td>
+                                <td class="table">84</td>
+                            </tr>
+                            <tr class="table">
+                                <td class="table">Lando Calresian</td>
+                                <td class="table">83</td>
+                                <td class="table"><input type="text" id="marks" value="92"></td>
+                                <td class="table">80</td>
+                                <td class="table">80</td>
+                                <td class="table">92</td>
+                                <td class="table">92</td>
+                                <td class="table">94</td>
+                                <td class="table">87</td>
+                                <td class="table">95</td>
+                            </tr>
+                            <tr class="table">
+                                <td class="table">Boba Fet</td>
+                                <td class="table">85</td>
+                                <td class="table">89</td>
+                                <td class="table">94</td>
+                                <td class="table">83</td>
+                                <td class="table">83</td>
+                                <td class="table">84</td>
+                                <td class="table">91</td>
+                                <td class="table">87</td>
+                                <td class="table">96</td>
+                            </tr>
+                            <tr class="table">
+                                <td class="table">Darth Vader</td>
+                                <td class="table">81</td>
+                                <td class="table">81</td>
+                                <td class="table"><input type="text" id="marks" value="96"></td>
+                                <td class="table">80</td>
+                                <td class="table">89</td>
+                                <td class="table">88</td>
+                                <td class="table">82</td>
+                                <td class="table">80</td>
+                                <td class="table">82</td>
+                            </tr>
+                            <tr class="table">
+                                <td class="table">Obi-Wan Kenobi</td>
+                                <td class="table"><input type="text" id="marks" value="85"></td>
+                                <td class="table">99</td>
+                                <td class="table">87</td>
+                                <td class="table">82</td>
+                                <td class="table">88</td>
+                                <td class="table">83</td>
+                                <td class="table">88</td>
+                                <td class="table">92</td>
+                                <td class="table">80</td>
+                            </tr>
+                            <tr class="table">
+                                <td class="table">R2-D2</td>
+                                <td class="table">81</td>
+                                <td class="table"><input type="text" id="marks" value="92"></td>
+                                <td class="table"><input type="text" id="marks" value="82"></td>
+                                <td class="table">86</td>
+                                <td class="table">83</td>
+                                <td class="table"><input type="text" id="marks" value="84"></td>
+                                <td class="table">98</td>
+                                <td class="table">85</td>
+                                <td class="table">96</td>
+                            </tr>
+                            <tr class="table">
+                                <td class="table">C-3PO</td>
+                                <td class="table">94</td>
+                                <td class="table">98</td>
+                                <td class="table">83</td>
+                                <td class="table">83</td>
+                                <td class="table">100</td>
+                                <td class="table">96</td>
+                                <td class="table">96</td>
+                                <td class="table">85</td>
+                                <td class="table">87</td>
+                            </tr>
+                            <tr class="table">
+                                <td class="table">Yoda</td>
+                                <td class="table">80</td>
+                                <td class="table">89</td>
+                                <td class="table">99</td>
+                                <td class="table">89</td>
+                                <td class="table">96</td>
+                                <td class="table">85</td>
+                                <td class="table">96</td>
+                                <td class="table">92</td>
+                                <td class="table">85</td>
+                            </tr>
+                            <tr class="table">
+                                <td class="table">Admiral Ackbar</td>
+                                <td class="table">82</td>
+                                <td class="table">88</td>
+                                <td class="table">95</td>
+                                <td class="table">100</td>
+                                <td class="table"><input type="text" id="marks" value="93"></td>
+                                <td class="table">98</td>
+                                <td class="table">85</td>
+                                <td class="table">87</td>
+                                <td class="table">99</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
