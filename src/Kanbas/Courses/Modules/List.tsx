@@ -1,14 +1,23 @@
 import React, { useState } from "react";
 import "./index.css";
 import { modules } from "../../Database";
-import { FaEllipsisV, FaCheckCircle, FaPlusCircle, FaCaretDown } from "react-icons/fa";
+import { FaEllipsisV, FaCheckCircle, FaPlusCircle, FaCaretDown, FaRemoveFormat, FaTrash, FaEdit } from "react-icons/fa";
 import { useParams } from "react-router";
 import { MdVisibility } from 'react-icons/md';
 import { TbGripVertical } from "react-icons/tb";
+import { FaDeleteLeft, FaDumpster } from "react-icons/fa6";
+import { useSelector, useDispatch } from "react-redux";
+import {
+    addModule,
+    deleteModule,
+    updateModule,
+    setModule,
+} from "./reducer";
+import { KanbasState } from "../../store";
+
 
 function ModuleList() {
     const { courseId } = useParams();
-    const modulesList = modules.filter((module) => module.course === courseId);
     const [selectedModule, setSelectedModule] = useState<{
         _id: string;
         name: string;
@@ -16,9 +25,16 @@ function ModuleList() {
         course: string;
         lessons?: { _id: string; name: string; description: string; module: string; }[];
     } | null>(null);
+    const moduleList = useSelector((state: KanbasState) =>
+        state.modulesReducer.modules);
+    const module = useSelector((state: KanbasState) =>
+        state.modulesReducer.module);
+    const dispatch = useDispatch();
+
+
     return (
         <>
-            <div className="row" style={{marginTop: "20px"}}>
+            <div className="row" style={{ marginTop: "20px" }}>
                 <div className="col d-flex justify-content-end mb-2 gap-1">
                     <button type="button" className="btn" style={{ backgroundColor: "#f5f5f5", border: "1px solid lightgray" }}>Collapse All</button>
                     <button type="button" className="btn" style={{ backgroundColor: "#f5f5f5", border: "1px solid lightgray" }}>
@@ -50,11 +66,23 @@ function ModuleList() {
                     </div>
                 </div>
             </div>
-            <div className="row" style={{paddingTop: "10px"}}>
-                <hr/>
+            <div className="row" style={{ paddingTop: "10px" }}>
+                <hr />
             </div>
-            <ul className="list-group" style={{paddingTop: "10px"}}>
-                {modulesList.map((module, index) => (
+            <ul className="list-group" style={{ paddingTop: "10px" }}>
+                <div className="form-group border p-3 rounded mb-3">
+                    <h4>Add/Update Modules</h4>
+                    <input className="form-control m-2" value={module.name}
+                        onChange={(e) => dispatch(setModule({ ...module, name: e.target.value }))}/>                
+                    <textarea className="form-control m-2" value={module.description}
+                       onChange={(e) => dispatch(setModule({ ...module, description: e.target.value })) }/>
+            
+                    <button className="btn btn-primary m-2" onClick={() => dispatch(addModule({ ...module, course: courseId }))}>Add</button>
+                    <button className="btn btn-primary m-2" onClick={() => dispatch(updateModule(module))}>Update</button>
+
+                </div>
+
+                {moduleList.filter((module) => module.course === courseId).map((module, index) => (
                     <li key={index}
                         className="list-group-item list-group-item-parent"
                         style={{ backgroundColor: "#f5f5f5", border: "1px solid lightgray" }}
@@ -67,11 +95,18 @@ function ModuleList() {
                                 <FaCheckCircle className="text-success" />
                                 <FaPlusCircle className="ms-2" />
                                 <FaEllipsisV className="ms-2" />
+                                <span onClick={() => dispatch(deleteModule(module._id))}>
+                                    <FaTrash className="ms-2 text-danger" />
+                                </span>
+                                <span  onClick={() => dispatch(setModule(module))}>
+                                    <FaEdit className="ms-2" />
+                                </span>
+
                             </span>
                         </div>
                         {selectedModule === module && module.lessons && (
                             <ul className="list-group" style={{ marginTop: "10px" }}>
-                                {module.lessons?.map((lesson, index) => (
+                                {module.lessons?.map((lesson: { name: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }, index: React.Key | null | undefined) => (
 
                                     <li className="list-group-item list-group-item-child"
                                         key={index}>

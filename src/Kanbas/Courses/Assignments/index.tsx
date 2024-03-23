@@ -1,24 +1,43 @@
 import React from "react";
-import { FaCaretDown, FaCheckCircle, FaEllipsisV, FaPlusCircle } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { FaCaretDown, FaCheckCircle, FaEdit, FaEllipsisV, FaPlusCircle, FaTrash } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
 import { assignments } from "../../Database";
 import './index.css';
 import { TbGripVertical } from "react-icons/tb";
 import { FaPlus } from "react-icons/fa6";
+import { deleteAssignment, setAssignment } from "./reducer";
+import { KanbasState } from "../../store";
 
 function Assignments() {
+    const intialAssignment = {
+        _id: "new",
+        title: "New Assignment Title",
+        course: "Assignment's Course",
+        description: "New Description",
+        points: "100",
+        dueDate: "2023-09-18",
+        availableFromDate: "2023-09-11",
+        availableUntilDate: "2023-09-18",
+    };
     const { courseId } = useParams();
-    const assignmentList = assignments.filter(
-        (assignment) => assignment.course === courseId);
-        
+    const assignmentList = useSelector(
+        (state: KanbasState) => state.assignmentsReducer.assignments
+    );
+    const assignment = useSelector(
+        (state: KanbasState) => state.assignmentsReducer.assignment
+    );
+    const dispatch = useDispatch();
     return (
         <>
-            <div className="d-flex gap-1" style={{ marginRight: "20px", marginTop: "20px"}}>
+            <div className="d-flex gap-1" style={{ marginRight: "20px", marginTop: "20px" }}>
                 <div className="me-auto w-25"><input type="text" className="form-control"
                     placeholder="Search for Assignment" /></div>
                 <button type="button" className="btn" style={{ backgroundColor: "#f5f5f5", border: "1px solid lightgray" }}><i className="fa-solid fa-plus"></i>
-                <FaPlus /> Group</button>
-                <button type="button" className="btn btn-danger"><FaPlus /> Assignment</button>
+                    <FaPlus /> Group</button>
+                <Link to={`/Kanbas/Courses/${courseId}/Assignments/new`}>
+                    <button type="button" className="btn btn-danger" onClick={() => dispatch(setAssignment(intialAssignment))}><FaPlus /> Assignment</button>
+                </Link>
                 <div className="dropdown">
                     <button className="btn" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false" style={{ backgroundColor: "#f5f5f5", border: "1px solid lightgray" }}>
@@ -36,7 +55,7 @@ function Assignments() {
                 <hr />
             </div>
 
-            <ul className="list-group square-list-group mb-3" style={{marginRight: "20px"}}>
+            <ul className="list-group square-list-group mb-3" style={{ marginRight: "20px" }}>
                 <li className="list-group-item list-group-item" style={{ backgroundColor: "#f5f5f5", border: "1px solid lightgray" }}>
                     <div className="d-flex justify-content-start align-items-center">
                         <TbGripVertical className="me-2" />
@@ -48,14 +67,17 @@ function Assignments() {
                     </div>
                 </li>
 
-                {assignmentList.map((assignment) => (
+                {assignmentList.filter(
+                    (assign: { course: string | undefined }) =>
+                        assign.course === courseId
+                ).map((assignment) => (
                     <li className="list-group-item assignment-border" key={assignment._id}>
                         <div className="d-flex justify-content-start align-items-center">
                             <TbGripVertical className="me-2" />
                             <i className="fa-solid fa-file-pen assignment-item-icon fa-lg p-3"></i>
                             <div className="assignment-item flex-grow-1">
                                 <div className="d-flex flex-column">
-                                    <div className="assignment-item">
+                                    <div className="assignment-item" onClick={() => dispatch(setAssignment(assignment))}>
                                         <Link to={`/Kanbas/Courses/${courseId}/Assignments/${assignment._id}`}>
                                             {assignment.title}
                                         </Link>
@@ -67,7 +89,20 @@ function Assignments() {
                                 </div>
                             </div>
                             <FaCheckCircle className="fa-lg me-3" style={{ color: 'green' }} />
-                            <FaEllipsisV className="fa-lg" />
+                            <FaEllipsisV className="fa-lg me-3" />
+                            <span onClick={(e) => {
+                                e.preventDefault();
+
+                                const confirmDelete = window.confirm(
+                                    "Are you sure you want to delete this assignment?"
+                                );
+                                if (confirmDelete) {
+                                    dispatch(deleteAssignment(assignment._id));
+                                }
+                            }}
+                            >
+                                <FaTrash className="fa-lg me-3 text-danger" />
+                            </span>
                         </div>
                     </li>
                 ))}

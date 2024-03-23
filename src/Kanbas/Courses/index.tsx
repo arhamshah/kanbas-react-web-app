@@ -9,7 +9,7 @@ import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
 import Grades from "./Grades";
 
-function Courses() {
+function Courses({ courses }: { courses: any[]; }) {
     const { courseId } = useParams();
     const location = useLocation();
     const currentPath = location.pathname.split('/').pop();
@@ -17,7 +17,7 @@ function Courses() {
     return (
         <div>
             <div className="course-nav">
-                <h3><HiMiniBars3 /> {course?._id} &gt; {currentPath} </h3>
+                <h3><HiMiniBars3 /> {course?.name} &gt; {currentPath} </h3>
                 <hr />
             </div>
             <div style={{ paddingLeft: "0.5em" }}>
